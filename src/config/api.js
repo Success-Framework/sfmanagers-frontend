@@ -3,7 +3,8 @@
 const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
 
 // Use local API server when running locally, otherwise use production API
-const BASE_URL = isLocalhost ? 'http://localhost:8888/api' : 'https://sfmanagers-backend.onrender.com/api';
+// const BASE_URL = isLocalhost ? 'http://localhost:8888/api' : 'https://sfmanagers-backend.onrender.com/api';
+const BASE_URL = isLocalhost ? 'https://sfmanagers-backend.onrender.com/api' : 'https://sfmanagers-backend.onrender.com/api';
 
 
 // API endpoints
