@@ -20,7 +20,7 @@ import React from "react";
 import { createRoot} from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "App";
-
+import "app.css";
 // Vision UI Dashboard React Context Provider
 import { VisionUIControllerProvider } from "context";
 // Auth Context Provider

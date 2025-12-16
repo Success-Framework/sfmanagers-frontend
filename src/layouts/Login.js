@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TextField, Button, Typography, Box, Alert } from "@mui/material";
+import { TextField, Button, Typography, Box, Alert, useTheme, useMediaQuery } from "@mui/material";
 import { login } from "api/auth";
 import { useHistory } from "react-router-dom";
 import edgeImage from "../assets/images/auth-bg.png";
@@ -12,6 +12,9 @@ const Login = ({ setIsAuthenticated }) => {
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -61,7 +64,7 @@ const Login = ({ setIsAuthenticated }) => {
     // Full screen background
     <Box
       sx={{
-        minHeight: "100vh",
+        minHeight: "100dvh",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -90,112 +93,113 @@ const Login = ({ setIsAuthenticated }) => {
           sx={{
             flex: 1,
             p: { xs: 3, md: 6 },
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
           }}
+          className="mobile-padding-box"
         >
-          <Typography variant="h4" align="center" sx={{ mb: 1, color: "#fff", fontWeight: 700 }}>
-            Welcome Back!
-          </Typography>
-          <Typography variant="subtitle1" align="center" sx={{ mb: 3, color: "#e0e0e0" }}>
-            Sign in to access your dashboard and manage your projects
-          </Typography>
+          <Box sx={{ margin: "auto 0" }}>
+            <Typography variant="h4" align="center" sx={{ mb: 1, color: "#fff", fontWeight: 700 }}>
+              Welcome Back!
+            </Typography>
+            <Typography variant="subtitle1" align="center" sx={{ mb: 3, color: "#e0e0e0" }}>
+              Sign in to access your dashboard and manage your projects
+            </Typography>
 
-          {error && (
-            <Alert severity="error" sx={{ mb: 2 }}>
-              {error}
-            </Alert>
-          )}
+            {error && (
+              <Alert severity="error" sx={{ mb: 2 }}>
+                {error}
+              </Alert>
+            )}
 
-          <form onSubmit={handleLogin}>
-            <TextField
-              label="Email"
-              fullWidth
-              margin="normal"
-              variant="outlined"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              error={!!errors.email}
-              helperText={errors.email}
-              InputLabelProps={{
-                sx: {
-                  color: "#000",
-                  transform: "translate(12px, 6px) scale(1)",
-                  "&.Mui-focused": {
-                    transform: "translate(14px, -22px) scale(0.75)",
-                    color: "#fff",
+            <form onSubmit={handleLogin}>
+              <TextField
+                label="Email"
+                fullWidth
+                margin="normal"
+                variant="outlined"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                error={!!errors.email}
+                helperText={errors.email}
+                InputLabelProps={{
+                  sx: {
+                    color: "#000",
+                    transform: "translate(12px, 6px) scale(1)",
+                    "&.Mui-focused": {
+                      transform: "translate(14px, -22px) scale(0.75)",
+                      color: "#fff",
+                    },
                   },
-                },
-              }}
-              InputProps={{
-                sx: {
-                  color: "#000",
-                  height: 50,
-                  padding: "14px",
-                },
-              }}
-            />
-
-            <TextField
-              label="Password"
-              type="password"
-              fullWidth
-              margin="normal"
-              variant="outlined"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              error={!!errors.password}
-              helperText={errors.password}
-              InputLabelProps={{
-                sx: {
-                  color: "#000",
-                  transform: "translate(12px, 6px) scale(1)",
-                  "&.Mui-focused": {
-                    transform: "translate(14px, -22px) scale(0.75)",
-                    color: "#fff",
+                }}
+                InputProps={{
+                  sx: {
+                    color: "#000",
+                    height: 50,
+                    padding: "14px",
                   },
-                },
-              }}
-              InputProps={{
-                sx: {
-                  color: "#000",
-                  height: 50,
-                  padding: "14px",
-                },
-              }}
-            />
+                }}
+              />
 
-            <ButtonLoader
-              loading={loading}
-              type="submit"
-              variant="contained"
-              fullWidth
-              sx={{
-                mt: 3,
-                py: 1.2,
-                fontWeight: 600,
-              }}
-            >
-              Login
-            </ButtonLoader>
-          </form>
+              <TextField
+                label="Password"
+                type="password"
+                fullWidth
+                margin="normal"
+                variant="outlined"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                error={!!errors.password}
+                helperText={errors.password}
+                InputLabelProps={{
+                  sx: {
+                    color: "#000",
+                    transform: "translate(12px, 6px) scale(1)",
+                    "&.Mui-focused": {
+                      transform: "translate(14px, -22px) scale(0.75)",
+                      color: "#fff",
+                    },
+                  },
+                }}
+                InputProps={{
+                  sx: {
+                    color: "#000",
+                    height: 50,
+                    padding: "14px",
+                  },
+                }}
+              />
+
+              <ButtonLoader
+                loading={loading}
+                type="submit"
+                variant="contained"
+                fullWidth
+                sx={{
+                  mt: 3,
+                  py: 1.2,
+                  fontWeight: 600,
+                }}
+              >
+                Login
+              </ButtonLoader>
+            </form>
+          </Box>
         </Box>
 
         {/* Image half */}
-        <Box
-          component="img"
-          src={edgeImage}
-          alt="decorative"
-          sx={{
-            flex: 1,
-            display: { xs: "none", md: "block" },
-            objectFit: "cover",
-            width: "100%",
-            height: "100%",
-            maxHeight: 450,
-          }}
-        />
+        {!isMobile && (
+          <Box
+            component="img"
+            src={edgeImage}
+            alt="decorative"
+            sx={{
+              flex: 1,
+              objectFit: "cover",
+              width: "100%",
+              height: "100%",
+              maxHeight: 450,
+            }}
+          />
+        )}
       </Box>
     </Box>
   );

@@ -1,0 +1,9 @@
+/* Apply only for mobile devices up to 768px width */
+@media (max-width: 768px) {
+  .mobile-padding-box {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    padding-top: 24px !important;
+    padding-bottom: 24px !important;
+  }
+}
